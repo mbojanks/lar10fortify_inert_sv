@@ -4,31 +4,38 @@ import { router, inertia } from '@inertiajs/svelte';
 import type {LoginErrors} from "$lib/../types";
 import i18n from "$lib/i18n";
 export let locale: string = '';
+export let emailfield: string = 'email';
+export let status: string;
 
+let form: HTMLFormElement;
 let loc: string;
-$: loc = locale ? '/' + locale : '';
+$: loc = (locale ? "/" + locale : "");
 
 const onSubmit = () => {
-    router.post(`${loc}/login`, values);
+    router.post(`${locale ? '/' + locale : ''}/forgot-password`, values);
+};
+
+const onReset = () => {
+    form?.reset();
 };
 export let errors: LoginErrors = {};
 let values = {
-    email: null,
-    password: null,
+    [emailfield]: ''
 };
 </script>
-<Card title={$i18n.t('server:auth.login')} mb="3">
-	<form method="POST" action="#" on:submit|preventDefault={onSubmit}>
+<Card title={$i18n.t('server:auth.forgotpwd')} mb="3">
+    {#if status}
+        <p>{status}</p>
+    {/if}
+	<form method="POST" action="#" bind:this={form} on:submit|preventDefault={onSubmit}>
 		<CardBody>
 			<El row>
                 <FormInput label={$i18n.t('server:auth.email')} name="email" bind:value={values.email} state={errors.email ? 'invalid' : 'valid'} hint={errors.email}></FormInput>
-                <FormInput label={$i18n.t('server:auth.passwordonform')} name="password" type="password" bind:value={values.password} state={errors.password ? 'invalid' : 'valid'} hint={errors.password}></FormInput>
             </El>
         </CardBody>
         <CardFooter>
-            <a class="y-button-link y-button-color-primary" use:inertia href={`${loc}/forgot-password`}>{$i18n.t('server:auth.forgotpwd')}</a>
 			<CardActions d="flex" gap="2">
-				<Button type="reset">{$i18n.t('server:auth.reset')}</Button>
+				<Button type="reset" on:click={onReset}>{$i18n.t('server:auth.reset')}</Button>
 				<Button color="primary" type="submit">{$i18n.t('server:auth.submit')}</Button>
 			</CardActions>
 		</CardFooter>

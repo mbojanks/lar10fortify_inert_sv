@@ -44,6 +44,9 @@ function routesToLocalize() {
     Route::get('/user/profile-information', function() {
         return Inertia::render('User/Profile',['optUrl' => config('app.url') . "/places/search", 'idUrl' => config('app.url') . "/places"]);
     });
+    Route::get('/user/profile', function() {
+        return Inertia::render('User/UserProfile',['optUrl' => config('app.url') . "/places/search", 'idUrl' => config('app.url') . "/places"]);
+    });
 }
 
 // API-like - no translations

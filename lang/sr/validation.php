@@ -33,7 +33,7 @@ return [
     ],
     'boolean' => 'The :attribute field must be true or false.',
     'can' => 'The :attribute field contains an unauthorized value.',
-    'confirmed' => 'The :attribute field confirmation does not match.',
+    'confirmed' => 'Ne podudara se polje za potvrdu vrednosti :attribute.',
     'current_password' => 'The password is incorrect.',
     'date' => 'The :attribute field must be a valid date.',
     'date_equals' => 'The :attribute field must be a date equal to :date.',
@@ -120,7 +120,7 @@ return [
         'mixed' => 'Polje :attribute mora sadržati bar jedno veliko i jedno malo slovo.',
         'numbers' => 'Polje :attribute mora sadržati najmanje jedan broj.',
         'symbols' => 'Polje :attribute mora sadržati najmanje jedan znak.',
-        'uncompromised' => 'Dato polje :attribute pojavljuje se kod curenja podataka. Molimo da izaberete drugo polje od :attribute.',
+        'uncompromised' => 'Dato polje :attribute pojavljuje se kod curenja podataka. Molimo da izaberete drugo polje, a ne :attribute.',
     ],
     'present' => 'The :attribute field must be present.',
     'present_if' => 'The :attribute field must be present when :other is :value.',
@@ -132,7 +132,7 @@ return [
     'prohibited_unless' => 'The :attribute field is prohibited unless :other is in :values.',
     'prohibits' => 'The :attribute field prohibits :other from being present.',
     'regex' => 'The :attribute field format is invalid.',
-    'required' => 'The :attribute field is required.',
+    'required' => 'Polje :attribute je obavezno.',
     'required_array_keys' => 'The :attribute field must contain entries for: :values.',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_if_accepted' => 'The :attribute field is required when :other is accepted.',
@@ -186,6 +186,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        "password" => "lozinka"
+    ],
 
 ];

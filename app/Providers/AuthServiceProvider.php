@@ -26,5 +26,18 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+        /* if we want to change default email views
+        ResetPassword::toMailUsing(function ($notifiable, $token) {
+            $emailResetUrl = url(route('password.reset', [
+                'token' => $token,
+                'email' => $notifiable->getEmailForPasswordReset(),
+            ], false));
+            return (new MailMessage)
+                ->subject(Lang::get('Reset Password Notification'))
+                ->view('email.auth.reset-password', [
+                    'url' => $emailResetUrl
+                ]);
+        });*/
     }
+
 }

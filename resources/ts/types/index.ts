@@ -108,6 +108,14 @@ export type LoginErrors = {
     password?: string
 }
 
+export type ResetPasswordErrors = LoginErrors & {
+    password_confirmation?: string
+}
+
+export type ConfirmPasswordErrors = {
+    password?: string
+}
+
 export type RegisterErrors = {
     email?: string,
     password?: string,
@@ -119,7 +127,7 @@ export type RegisterErrors = {
     userimg?: string
 }
 export type RegisterValues = {
-    email?: string,
+    email?: string|undefined,
     password?: string,
     password_confirmation?: string,
     name?: string,
@@ -129,6 +137,12 @@ export type RegisterValues = {
     user_place_id?: number,
     role_id?: number,
     userimg?: FileList
+}
+
+export type UpdatePasswordErrors = {
+    current_password?: string,
+    password?: string,
+    password_confirmation?: string,
 }
 
 export type Municipality = {

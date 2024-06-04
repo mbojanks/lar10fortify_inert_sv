@@ -1,21 +1,20 @@
 <script lang="ts">
-    import { Card, CardBody, CardFooter, CardActions } from "yesvelte";
+    import { Card, CardBody, CardFooter, CardActions, CardHeader, CardTitle } from "yesvelte";
     import { router } from '@inertiajs/svelte';
 
-    import { FormInput, Button, Fieldset } from "yesvelte";
-    import AutoCompleteFromServer from "$lib/Components/AutoCompleteFromServer.svelte";
-    import FormImgSelect from '$lib/Components/FormImgSelect.svelte';
-
+    import {  Button } from "yesvelte";
 
     import i18n from "$lib/i18n";
+    import { onMount } from "svelte";
 
     export let submitUrl: string;
-    export let config: any;
-    export let dataUrl: string;
-    export let formData: any;
+    export let config: any = undefined;
+    export let dataUrl: string | undefined = undefined;
+    export let formData: any = undefined;
     export let title: string;
+    export let description: string;
 
-    let values: any;
+    export let values: any;
     let errors: any;
     let form: HTMLFormElement | undefined;
 
@@ -28,18 +27,44 @@
     const onReset = () => {
         form?.reset();
     }
+
+    const refreshData = () => {
+        if (dataUrl) {
+            fetch(dataUrl).then((response) => response.json()).then((json) => {
+                formData = json;
+            }).catch((err: any) => {
+                errors.data = err;
+            });
+        }
+    };
+
+    onMount(() => {
+        if (!formData) {
+            refreshData();
+        }
+    });
 </script>
-<Card {title} mb="3">
+<Card mb="3">
+    <CardHeader>
+        <CardTitle>{title}</CardTitle>
+        {description}
+    </CardHeader>
     <form method="POST" action="#" bind:this={form} on:submit|preventDefault={onSubmit}>
         <CardBody>
-            <Fieldset>
-                <slot {values} {errors}></slot>
-            </Fieldset>
+            <slot {values}>
+                {#if config}
+                    {#each config as confitem}
+                        <svelte:component this={confitem.component} />
+                    {/each}
+                {/if}
+            </slot>
         </CardBody>
         <CardFooter>
             <CardActions d="flex" gap="2">
-                <Button type="reset" on:click={onReset}>{$i18n.t('server:auth.reset')}</Button>
-                <Button color="primary" type="submit">{$i18n.t('server:auth.submit')}</Button>
+                <slot name="commands">
+                    <Button type="reset" on:click={onReset}>{$i18n.t('server:auth.reset')}</Button>
+                    <Button color="primary" type="submit">{$i18n.t('server:auth.submit')}</Button>
+                </slot>
             </CardActions>
         </CardFooter>
     </form>

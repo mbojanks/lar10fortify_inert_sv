@@ -4,17 +4,18 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use App\Http\Resources\CapResource;
 use App\Models\Role;
-//use Laravel\Sanctum\HasApiTokens;
+use App\Http\Resources\CapResource;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use /*HasApiTokens,*/ HasFactory, Notifiable, FieldsWithFilesObservable;
+    use HasApiTokens, HasFactory, Notifiable, TwoFactorAuthenticatable, FieldsWithFilesObservable;
 
     /**
      * BM> files for the fields to be in synch

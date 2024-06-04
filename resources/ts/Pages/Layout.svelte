@@ -20,7 +20,10 @@
 <El container tag="main">
     <El row tag="header" alignItems="center">
         <El col>
-            <h1 style="margin-block-end: 0;">{$i18n.t('server:home.slogan')}</h1>
+            <a href={ loc ?? "/"}>
+                <img src="logo.jpg" alt="logo" width="64px" />
+                <h1 style="margin-block-end: 0;display: inline-block;">{$i18n.t('server:home.slogan')}</h1>
+            </a>
         </El>
         <El col>
             <El row rowCols="auto" justifyContent="center">
@@ -39,9 +42,18 @@
                             <span>{initials(user.name)}</span>
                         {/if}
                     </Avatar>
-                    <span>{$i18n.t('server:home.welcome')}, <a use:inertia href={`${loc}/user/profile-information`}>{user.name}</a></span>
+                    <span>{$i18n.t('server:home.welcome')}, <Dropdown>
+                        <Button slot="target" link color="primary">{user.name}</Button>
+                        <DropdownMenu>
+                            <DropdownItem>
+                                <Icon name="user" color="primary" /><a class="y-button-link y-button-color-primary" use:inertia href={`${loc}/user/profile`}>{$i18n.t('server:auth.userprofile')}</a>
+                            </DropdownItem>
+                            <DropdownItem>
+                                <Icon name="user-off" color="primary" /><button class="y-button-link y-button-color-primary" use:inertia={{href: logoutUrl, method: 'post'}}>{$i18n.t('server:auth.logout')}</button>
+                            </DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown></span>
                     <!-- svelte-ignore missing-declaration -->
-                    <button class="y-button y-button-color-primary" use:inertia={{href: logoutUrl, method: 'post'}} type="button">{$i18n.t('server:auth.logout')}</button>
                     {:else}
                         <Dropdown>
                             <Button slot="target" link color="primary">{$i18n.t('server:auth.user')}</Button>

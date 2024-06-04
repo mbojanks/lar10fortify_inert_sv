@@ -14,7 +14,7 @@ return [
     */
 
     'reset' => 'Vaša lozinka je resetovana.',
-    'sent' => 'Poslali smo Vam na adresu e-pošte link za reset Vaše lozinke.',
+    'sent' => 'Poslali smo Vam na adresu e-pošte link za promenu Vaše lozinke.',
     'throttled' => 'Molimo sačekajte pre ponovnih pokušaja.',
     'token' => 'Ovaj token za reset lozinke je neispravan.',
     'user' => "Ne možemo pronaći korisnika sa tom adresom e-pošte.",

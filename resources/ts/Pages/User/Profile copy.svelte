@@ -23,7 +23,7 @@
     export let idUrl: string = '';
     export let locale: string = '';
     let values: UserProfile = {
-        email: user.email || '',
+        email: user.email,
         name: user.name,
         userimg: user.userimg,
         user_place_id: user.user_place_id,
@@ -31,6 +31,9 @@
         phone: user.phone
     };
 </script>
+<svelte:head>
+    <title>{$i18n.t('server:auth.profileForm')}</title>
+</svelte:head>
 <Card title={$i18n.t('server:auth.profileForm')} mb="3">
     <form method="POST" action="#" bind:this={form} on:submit|preventDefault={onSubmit}>
         <CardBody>

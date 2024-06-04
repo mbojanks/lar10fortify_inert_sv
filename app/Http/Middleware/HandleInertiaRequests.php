@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Inertia\Middleware;
 use Illuminate\Http\Request;
+use Laravel\Fortify\Features;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use CodeZero\LocalizedRoutes\Facades\LocaleConfig;
@@ -41,7 +42,27 @@ class HandleInertiaRequests extends Middleware
     {
         $sharedProps = [
             // lazy load common props
-            'user' => fn() => Auth::user(),
+            'user' => function() use($request) {
+                //Auth::user()
+                if (!$request->user()) {
+                    return;
+                }
+
+                return array_merge(
+                  $request->user()->toArray(),
+                  [
+                    'two_factor_enabled' => Features::enabled(Features::twoFactorAuthentication()) && ! is_null($request->user()->two_factor_secret),
+                  ]
+                );
+            },
+            /* for csrf in fetch
+            '_token' => function () {
+                return Session::token();
+            },
+            '_session' => function () {
+                return Session::all();
+            },
+            */
         ];
         if (config('fortify.localized.i18n')) {
             $sharedProps['locale'] = fn () => App::getLocale();

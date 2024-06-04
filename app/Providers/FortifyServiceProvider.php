@@ -3,12 +3,10 @@
 namespace App\Providers;
 
 use Inertia\Inertia;
-use App\Models\Place;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Laravel\Fortify\Fortify;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\PlaceResource;
+
 use Illuminate\Support\Facades\Route;
 use App\Actions\Fortify\CreateNewUser;
 use Illuminate\Support\ServiceProvider;
@@ -74,6 +72,26 @@ class FortifyServiceProvider extends ServiceProvider
             return Inertia::render('User/Show', [
                 "message" => __('Confirmation email was sent to your email address you entered in the registration form.')
             ]);
+        });
+
+        Fortify::requestPasswordResetLinkView(function () {
+            return Inertia::render('Auth/Forgotpwd', [
+                "id" => Auth()->id(), // check if it is the actual authenticated user on front end too
+                "emailfield" => config('fortify.email', 'email'),
+                "status" => session('status')
+            ]);
+        });
+
+        Fortify::resetPasswordView(function (Request $request) {
+            return Inertia::render('Auth/Resetpwd', ['token' => $request->route('token')]);
+        });
+
+        Fortify::confirmPasswordView(function () {
+            return Inertia::render('Auth/Confirmpwd');
+        });
+
+        Fortify::twoFactorChallengeView(function () {
+            return Inertia::render('Auth/TwoFAChallenge');
         });
     }
 

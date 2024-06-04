@@ -3,8 +3,6 @@
     //export { default as layout } from '../Layout.svelte';
 </script>
 <script lang="ts">
-    import { Avatar } from "yesvelte";
-    import type { User } from "../../types";
     import i18n from '$lib/i18n';
 
     //export let user: User;
