@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "@inertiajs/svelte": "^1.0.15",
+        "@wx/svelte-core": "^1.1.3",
         "i18next": "^23.10.1",
         "svelte-i18next": "^2.2.2",
         "vite-plugin-laravel-translations": "^0.2.2",

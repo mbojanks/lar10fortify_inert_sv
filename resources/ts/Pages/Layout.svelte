@@ -2,10 +2,12 @@
     import { inertia } from '@inertiajs/svelte';
     import tabler from 'yesvelte/css/tabler.min.css?url';
     import type { User } from '../types';
-    import { Avatar, Button, Dropdown, DropdownItem, DropdownMenu, El, Icon } from 'yesvelte';
+    import { Avatar, El, Icon } from 'yesvelte';
     import { initials } from '$lib/utils';
     import i18n from '$lib/i18n';
     import LangSwitcher from '$lib/Components/LangSwitcher.svelte';
+    import { Button, Willow } from '@wx/svelte-core';
+    import DropdownC from '$lib/Components/DropdownC.svelte';
 
     export let user: User;
     export let locales: string[];
@@ -17,6 +19,7 @@
 <svelte:head>
     <link rel='stylesheet' href={tabler}/>
 </svelte:head>
+<Willow>
 <El container tag="main">
     <El row tag="header" alignItems="center">
         <El col>
@@ -42,30 +45,22 @@
                             <span>{initials(user.name)}</span>
                         {/if}
                     </Avatar>
-                    <span>{$i18n.t('server:home.welcome')}, <Dropdown>
-                        <Button slot="target" link color="primary">{user.name}</Button>
-                        <DropdownMenu>
-                            <DropdownItem>
-                                <Icon name="user" color="primary" /><a class="y-button-link y-button-color-primary" use:inertia href={`${loc}/user/profile`}>{$i18n.t('server:auth.userprofile')}</a>
-                            </DropdownItem>
-                            <DropdownItem>
-                                <Icon name="user-off" color="primary" /><button class="y-button-link y-button-color-primary" use:inertia={{href: logoutUrl, method: 'post'}}>{$i18n.t('server:auth.logout')}</button>
-                            </DropdownItem>
-                        </DropdownMenu>
-                    </Dropdown></span>
+                    <!-- svelte-ignore a11y-click-events-have-key-events -->
+                    <!-- svelte-ignore a11y-no-static-element-interactions -->
+                    <DropdownC>
+                        <span slot="visible">{$i18n.t('server:home.welcome')}, <Button>{user.name}</Button></span>
+                        <Icon name="user" color="primary" /><a class="y-button-link y-button-color-primary" use:inertia href={`${loc}/user/profile`}>{$i18n.t('server:auth.userprofile')}</a>
+                        <Icon name="user-off" color="primary" /><button class="y-button-link y-button-color-primary" use:inertia={{href: logoutUrl, method: 'post'}}>{$i18n.t('server:auth.logout')}</button>
+                    </DropdownC>
                     <!-- svelte-ignore missing-declaration -->
                     {:else}
-                        <Dropdown>
-                            <Button slot="target" link color="primary">{$i18n.t('server:auth.user')}</Button>
-                            <DropdownMenu>
-                                <DropdownItem>
-                                    <Icon name="user" color="primary" /><a class="y-button-link y-button-color-primary" use:inertia href={`${loc}/login`}>{$i18n.t('server:auth.login')}</a>
-                                </DropdownItem>
-                                <DropdownItem>
-                                    <Icon name="report-medical" color="primary" /><a class="y-button-link y-button-color-primary" use:inertia href={`${loc}/register`}>{$i18n.t('server:auth.register')}</a>
-                                </DropdownItem>
-                            </DropdownMenu>
-                        </Dropdown>
+                    <!-- svelte-ignore a11y-click-events-have-key-events -->
+                    <!-- svelte-ignore a11y-no-static-element-interactions -->
+                    <DropdownC>
+                        <svelte:fragment slot="visible"><Button>{$i18n.t('server:auth.user')}</Button></svelte:fragment>
+                        <div><Icon name="user" color="primary" /><a class="y-button-link y-button-color-primary" use:inertia href={`${loc}/login`}>{$i18n.t('server:auth.login')}</a></div>
+                        <div><Icon name="report-medical" color="primary" /><a class="y-button-link y-button-color-primary" use:inertia href={`${loc}/register`}>{$i18n.t('server:auth.register')}</a></div>
+                    </DropdownC>
                     {/if}
                 </El>
                 <El col>
@@ -78,3 +73,4 @@
         <slot />
     </El>
 </El>
+</Willow>
