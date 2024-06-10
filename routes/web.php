@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PlaceController;
+use App\Http\Controllers\CurrentUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,8 @@ function routesToLocalize() {
     Route::get('/user/profile', function() {
         return Inertia::render('User/UserProfile',['optUrl' => config('app.url') . "/places/search", 'idUrl' => config('app.url') . "/places"]);
     });
+    Route::delete('/user', [CurrentUserController::class, 'destroy'])
+                ->name('current-user.destroy');
 }
 
 // API-like - no translations

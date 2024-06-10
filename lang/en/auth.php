@@ -66,5 +66,8 @@ return [
     '2FAchallengeCodeDesc' => 'Please confirm access to your account by entering the authentication code provided by your authenticator application.',
     '2FAchallengeUseRecovery' => 'Use a recovery code',
     '2FAchallengeUseCode' => 'Use an authentication code',
-    'accountdeleteDescription' => 'Here you can delete your user account and its all associated data.'
+    'accountdeleteDescription' => 'Here you can delete your user account and its all associated data.',
+    'sureAboutSelfDelete' => 'Are you sure?',
+    'sureAboutSelfDeleteDesc' => 'Do you really want to remove your account and all your data? What you\'ve done cannot be undone.',
+    'sureAboutSelfDeleteDo' => 'Delete My Account'
 ];

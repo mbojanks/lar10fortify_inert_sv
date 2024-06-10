@@ -4,6 +4,7 @@
     import type {RegisterErrors, Place, RegisterValues} from "$lib/../types";
     import i18n from "$lib/i18n";
     import AutoCompleteFromServer from "$lib/Components/AutoCompleteFromServer.svelte";
+    import FormImgSelect from "$lib/Components/FormImgSelect.svelte";
 
 
     /*let items: Place[] = [];
@@ -50,7 +51,8 @@
         email: "",
         password: "",
         password_confirmation: "",
-        name: ""
+        name: "",
+        userimg: undefined
     };
     </script>
     <Card title={$i18n.t('server:auth.registerForm')} mb="3">
@@ -79,7 +81,7 @@
                     >
                         {item.place} ({item.municipality})
                     </AutoCompleteFromServer>
-                    <FormFileUpload label={$i18n.t('server:auth.userimage')} name="userimg" bind:files={values.userimg} state={errors.userimg ? 'invalid' : 'valid'} hint={errors.userimg}></FormFileUpload>
+                    <FormImgSelect label={$i18n.t('server:auth.userimage')} name="userimg" bind:value={values.userimg} size="xl" state={errors.userimg ? 'invalid' : 'valid'} hint={errors.userimg}></FormImgSelect>
                 </Fieldset>
             </CardBody>
             <CardFooter>

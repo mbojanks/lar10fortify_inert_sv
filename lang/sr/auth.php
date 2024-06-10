@@ -66,5 +66,8 @@ return [
     '2FAchallengeCodeDesc' => 'Molimo potvrdite pristup Vašem nalogu unosom koda koji daje Vaša mobilna aplikacija za proveru identiteta.',
     '2FAchallengeUseRecovery' => 'Koristi kod za oporavak',
     '2FAchallengeUseCode' => 'Koristi kod za proveru identiteta',
-    'accountdeleteDescription' => 'Ovde možete obrisati svoj korisnički nalog i sve sa njim povezane podatke.'
+    'accountdeleteDescription' => 'Ovde možete obrisati svoj korisnički nalog i sve sa njim povezane podatke.',
+    'sureAboutSelfDelete' => 'Da li ste sigurni?',
+    'sureAboutSelfDeleteDesc' => 'Da li zaista želite ukloniti svoj korisnički nalog i sve svoje podatke? Ako to uradite, više ne možete to poništiti!',
+    'sureAboutSelfDeleteDo' => 'Ukloni moj korisnički nalog'
 ];

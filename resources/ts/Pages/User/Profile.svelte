@@ -52,7 +52,7 @@
                 >
                     {item.place} ({item.municipality})
                 </AutoCompleteFromServer>
-                <FormImgSelect label={$i18n.t('server:auth.userimage')} name="userimg" bind:value={values.userimg} size="xl" state={errors.userimg ? 'invalid' : 'valid'} hint={errors.name}></FormImgSelect>
+                <FormImgSelect label={$i18n.t('server:auth.userimage')} name="userimg" bind:value={values.userimg} size="xl" state={errors.userimg ? 'invalid' : 'valid'} hint={errors.userimg}></FormImgSelect>
             </Fieldset>
         </CardBody>
         <CardFooter>

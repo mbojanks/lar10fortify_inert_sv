@@ -4,10 +4,12 @@
     import Profile from './Profile.svelte';
     import SingleForm from '$lib/Components/SingleForm.svelte';
     import TwoFa from '$lib/Components/2fa.svelte';
-    import type { RegisterErrors, UpdatePasswordErrors, User } from "resources/ts/types";
+    import type { ConfirmPasswordErrors, RegisterErrors, UpdatePasswordErrors, User } from "resources/ts/types";
     import ConfirmPasswordC from "$lib/Components/ConfirmPasswordC.svelte";
+    import { router } from "@inertiajs/svelte";
+    import DeleteSelf from "$lib/Components/DeleteSelf.svelte";
 
-    export let errors: {updatePassword?: UpdatePasswordErrors, updateProfileInformation?: RegisterErrors, twoFactorAuthentication?: any} = {updateProfileInformation: {}};
+    export let errors: {updatePassword?: UpdatePasswordErrors, updateProfileInformation?: RegisterErrors, twoFactorAuthentication?: any, deleteUser?: ConfirmPasswordErrors } = {updateProfileInformation: {}};
     let updPwdErrors: any;
     let updateProfileInformationErrors: RegisterErrors;
     $: if (typeof errors.updatePassword !== 'undefined') updPwdErrors = errors.updatePassword; else updPwdErrors={current_password:''};
@@ -20,6 +22,7 @@
 
     export let optUrl: string = '';
     export let idUrl: string = '';
+
 </script>
 <svelte:head>
     <title>{$i18n.t('server:auth.profileForm')}</title>
@@ -52,9 +55,7 @@
                         <TwoFa title={$i18n.t('server:auth.2fa')} description={$i18n.t('server:auth.2fadesc')} {locale} />
                     </TabPanel>
                     <TabPanel>
-                        <h4>{$i18n.t('server:auth.accountdelete')}</h4>
-                        <p>{$i18n.t('server:auth.accountdeleteDescription')}</p>
-                        <ConfirmPasswordC><Button color="pinterest">{$i18n.t('server:auth.accountdelete')}</Button></ConfirmPasswordC>
+                        <DeleteSelf errors={errors.deleteUser} {locale}></DeleteSelf>
                     </TabPanel>
                 </TabContent>
             </CardBody>
