@@ -21,7 +21,7 @@
     <El row tag="header" alignItems="center">
         <El col>
             <a href={ loc ?? "/"}>
-                <img src="logo.jpg" alt="logo" width="64px" />
+                <img src="/logo.jpg" alt="logo" width="64px" />
                 <h1 style="margin-block-end: 0;display: inline-block;">{$i18n.t('server:home.slogan')}</h1>
             </a>
         </El>

@@ -11,7 +11,7 @@ export default defineConfig({
             input: ['resources/css/app.css', 'resources/ts/app.ts'],
             refresh: true,
         }),
-        laravelTranslations["default"]/* 'laravelTranslations is not a function' type-safe hack */({
+        laravelTranslations/* ["default"] 'laravelTranslations is not a function' type-safe hack */({
             namespace: "server"
         }),
         svelte()
@@ -20,5 +20,9 @@ export default defineConfig({
         alias: {
             $lib: path.resolve("./resources/ts/lib")
         }
-    }
+    },
+    optimizeDeps: {
+        include: ['litepicker'],
+        exclude: ['yesvelte'] // Ako YeSvelte pravi probleme
+      }
 })

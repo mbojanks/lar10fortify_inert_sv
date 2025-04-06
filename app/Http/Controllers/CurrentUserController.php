@@ -28,6 +28,7 @@ class CurrentUserController extends Controller
 
         //delete user -> maybe later within DB::transaction(function() use $user {})
         ($request->user()->fresh())->delete();
+        //delete user role(s) ??
 
         $guard->logout();
 

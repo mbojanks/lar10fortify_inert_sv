@@ -1,12 +1,10 @@
 <script lang="ts">
-    import { Button, Card, CardBody, CardHeader, El, FormInput, TabContent, TabItem, TabList, TabPanel, Tabs } from "yesvelte";
+    import { Card, CardBody, CardHeader, El, FormInput, TabContent, TabItem, TabList, TabPanel, Tabs, FormDatePicker } from "yesvelte";
     import i18n from '$lib/i18n';
     import Profile from './Profile.svelte';
     import SingleForm from '$lib/Components/SingleForm.svelte';
     import TwoFa from '$lib/Components/2fa.svelte';
     import type { ConfirmPasswordErrors, RegisterErrors, UpdatePasswordErrors, User } from "resources/ts/types";
-    import ConfirmPasswordC from "$lib/Components/ConfirmPasswordC.svelte";
-    import { router } from "@inertiajs/svelte";
     import DeleteSelf from "$lib/Components/DeleteSelf.svelte";
 
     export let errors: {updatePassword?: UpdatePasswordErrors, updateProfileInformation?: RegisterErrors, twoFactorAuthentication?: any, deleteUser?: ConfirmPasswordErrors } = {updateProfileInformation: {}};
@@ -22,6 +20,18 @@
 
     export let optUrl: string = '';
     export let idUrl: string = '';
+
+    let dat: Date = new Date();
+    function formatText(date: Date ): string | undefined {
+        return new Intl.DateTimeFormat("sr-Latn-RS",{
+            year: 'numeric',
+            month: 'short',
+            day: '2-digit',
+            hour12: false,
+            timeZone: 'Europe/Belgrade'
+        }).format(new Date(date));
+    }
+    let txt: string | undefined = '';
 
 </script>
 <svelte:head>
@@ -49,6 +59,7 @@
                             <FormInput colMd="auto" label={$i18n.t('server:auth.passwordold')} type="password" name="current_password" bind:value={valuesToUpdate.current_password} state={(updPwdErrors.current_password) ? 'invalid' : 'valid'} hint={errors.updatePassword?.current_password}></FormInput>
                             <FormInput colMd="auto" label={$i18n.t('server:auth.passwordnew')} type="password" name="password" bind:value={valuesToUpdate.password} state={(updPwdErrors.password) ? 'invalid' : 'valid'} hint={errors.updatePassword?.password}></FormInput>
                             <FormInput colMd="auto" label={$i18n.t('server:auth.passwordnewconfirm')} type="password" name="password_confirmation" bind:value={valuesToUpdate.password_confirmation} state={(updPwdErrors.password_confirmation) ? 'invalid' : 'valid'} hint={errors.updatePassword?.password_confirmation}></FormInput>
+                            <FormDatePicker colMd="auto" label={"test datepicker"} name="datepicker_test" options={{lang: 'sr-Latn-RS', dropdowns: {years: true, months: true }, format: 'DD. MMM YYYY.'}} bind:value={dat} bind:text={txt} state={!dat ? 'invalid' : 'valid'} hint={txt} {formatText}></FormDatePicker>
                         </SingleForm>
                     </TabPanel>
                     <TabPanel>

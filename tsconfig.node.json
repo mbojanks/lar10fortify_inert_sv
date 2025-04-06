@@ -2,8 +2,8 @@
   "compilerOptions": {
     "composite": true,
     "skipLibCheck": true,
-    "module": "ESNext",
-    "moduleResolution": "Bundler", // "bundler"
+    "module": "NodeNext", //"ESNext",
+    "moduleResolution": "nodenext", // "bundler"
   },
   "include": ["vite.config.ts"]
 }

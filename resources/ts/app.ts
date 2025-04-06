@@ -1,7 +1,7 @@
 import './bootstrap';
 import { createInertiaApp } from '@inertiajs/svelte';
 import Layout from './Pages/Layout.svelte';
-import type { PageProps } from './types';
+import type { PageProps } from './types/index';
 
 createInertiaApp({
   resolve: (name: string) => {
